@@ -1,0 +1,179 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/main.gd" type="Script" id=1]
+
+[node name="main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="container_top" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 39.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_new" type="Button" parent="container_top"]
+margin_top = 9.0
+margin_right = 38.0
+margin_bottom = 29.0
+size_flags_vertical = 4
+text = "new"
+
+[node name="btn_save" type="Button" parent="container_top"]
+margin_left = 42.0
+margin_top = 9.0
+margin_right = 83.0
+margin_bottom = 29.0
+size_flags_vertical = 4
+text = "save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_load" type="Button" parent="container_top"]
+margin_left = 87.0
+margin_top = 9.0
+margin_right = 126.0
+margin_bottom = 29.0
+size_flags_vertical = 4
+text = "load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_quit" type="Button" parent="container_top"]
+margin_left = 130.0
+margin_top = 9.0
+margin_right = 167.0
+margin_bottom = 29.0
+size_flags_vertical = 4
+text = "quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_title" type="Label" parent="."]
+margin_left = 13.0
+margin_top = 62.0
+margin_right = 53.0
+margin_bottom = 86.0
+text = "Title"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="label_title"]
+margin_left = 40.0
+margin_right = 154.0
+margin_bottom = 24.0
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+margin_top = 106.122
+margin_bottom = 301.122
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="World" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ItemList" type="ItemList" parent="TabContainer/World"]
+margin_right = 290.0
+margin_bottom = 117.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/World"]
+margin_left = 313.0
+margin_right = 399.0
+margin_bottom = 112.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_item_add" type="Button" parent="TabContainer/World/VBoxContainer"]
+margin_right = 86.0
+margin_bottom = 20.0
+text = "Add"
+
+[node name="btn_item_add2" type="Button" parent="TabContainer/World/VBoxContainer"]
+margin_top = 24.0
+margin_right = 86.0
+margin_bottom = 44.0
+text = "Edit"
+
+[node name="btn_item_remove" type="Button" parent="TabContainer/World/VBoxContainer"]
+margin_top = 48.0
+margin_right = 86.0
+margin_bottom = 68.0
+text = "Remove"
+
+[node name="btn_item_move_up" type="Button" parent="TabContainer/World/VBoxContainer"]
+margin_top = 72.0
+margin_right = 86.0
+margin_bottom = 92.0
+text = "Move up"
+
+[node name="btn_item_move_down" type="Button" parent="TabContainer/World/VBoxContainer"]
+margin_top = 96.0
+margin_right = 86.0
+margin_bottom = 116.0
+text = "Move down"
+
+[node name="Source" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="output" type="TextEdit" parent="TabContainer/Source"]
+margin_right = 290.0
+margin_bottom = 159.0
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Source"]
+margin_left = 313.0
+margin_right = 399.0
+margin_bottom = 159.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_source_import" type="Button" parent="TabContainer/Source/VBoxContainer"]
+margin_right = 86.0
+margin_bottom = 20.0
+text = "Import"
+
+[node name="btn_source_export" type="Button" parent="TabContainer/Source/VBoxContainer"]
+margin_top = 24.0
+margin_right = 86.0
+margin_bottom = 44.0
+text = "Export"
+[connection signal="update_data" from="." to="." method="_on_main_update_data"]
+[connection signal="pressed" from="container_top/btn_new" to="." method="_on_btn_new_pressed"]
+[connection signal="pressed" from="container_top/btn_save" to="." method="_on_btn_save_pressed"]
+[connection signal="pressed" from="container_top/btn_load" to="." method="_on_btn_load_pressed"]
+[connection signal="pressed" from="container_top/btn_quit" to="." method="_on_btn_quit_pressed"]
+[connection signal="text_changed" from="label_title/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_add" to="." method="_on_btn_item_add_pressed"]
+[connection signal="text_changed" from="TabContainer/Source/output" to="." method="_on_output_text_changed"]
