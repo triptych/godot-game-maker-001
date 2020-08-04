@@ -169,6 +169,42 @@ margin_top = 24.0
 margin_right = 86.0
 margin_bottom = 44.0
 text = "Export"
+
+[node name="dialog_gamesaved" type="AcceptDialog" parent="."]
+margin_left = 331.0
+margin_top = 39.0
+margin_right = 414.0
+margin_bottom = 97.0
+window_title = "Game Saved"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_right = 512.0
+margin_bottom = 206.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 1
+show_hidden_files = true
+current_dir = "user://"
+current_file = "saved_game.sav"
+current_path = "user://saved_game.sav"
+
+[node name="dialog_save" type="FileDialog" parent="."]
+margin_left = 70.0
+margin_top = 54.0
+margin_right = 508.0
+margin_bottom = 268.0
+resizable = true
+access = 1
+current_dir = "user://"
+current_file = "saved_game.sav"
+current_path = "user://saved_game.sav"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="update_data" from="." to="." method="_on_main_update_data"]
 [connection signal="pressed" from="container_top/btn_new" to="." method="_on_btn_new_pressed"]
 [connection signal="pressed" from="container_top/btn_save" to="." method="_on_btn_save_pressed"]
@@ -177,3 +213,5 @@ text = "Export"
 [connection signal="text_changed" from="label_title/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_add" to="." method="_on_btn_item_add_pressed"]
 [connection signal="text_changed" from="TabContainer/Source/output" to="." method="_on_output_text_changed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="dialog_save" to="." method="_on_dialog_save_file_selected"]

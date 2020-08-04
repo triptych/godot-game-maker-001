@@ -37,42 +37,14 @@ func _on_btn_new_pressed():
 
 func _on_btn_save_pressed():
 	print('btn_save_pressed')
-	
-		# Open a file
-	var file = File.new()
-	if file.open("user://saved_game.sav", File.WRITE) != 0:
-		print("Error opening file")
-		return
-	
-	
-	# Save the dictionary as JSON (or whatever you want, JSON is convenient here because it's built-in)
-	file.store_line(to_json(data))
-	file.close()
-	pass # Replace with function body.
-	
-	
+	$dialog_save.popup_centered()
 	pass # Replace with function body.
 
 
 func _on_btn_load_pressed():
 	print('btn_load_pressed')
-	# Check if there is a saved file
-	var file = File.new()
-	if not file.file_exists("user://saved_game.sav"):
-		print("No file saved!")
-		return
-	# Open existing file
-	if file.open("user://saved_game.sav", File.READ) != 0:
-		print("Error opening file")
-		return
-		
-	# Get the data
-	var data = {}
-	data = parse_json(file.get_line())
-
-	# Then do what you want with the data		
-	# $output.text = str(data)
-	$TabContainer/Source/output.text = str(data)
+	open_file_dialog()
+	return
 	
 	pass # Replace with function body.
 
@@ -106,4 +78,52 @@ func _on_main_update_data(label, value):
 func _on_btn_item_add_pressed():
 	print("btn_item_add_pressed")
 	$TabContainer/World/ItemList.add_item(str("placeholder", rand_range(0,300)))
+	pass # Replace with function body.
+
+
+func open_file_dialog():
+	$FileDialog.popup()
+	
+	pass
+
+
+func _on_FileDialog_file_selected(path): 
+	print(str("on file selected:", path))
+	# Check if there is a saved file
+	var file = File.new()
+	if not file.file_exists(path):
+		print("No file saved!")
+		return
+	# Open existing file
+	if file.open(path, File.READ) != 0:
+		print("Error opening file")
+		return
+		
+	# Get the data
+	var data = {}
+	data = parse_json(file.get_line())
+
+	# Then do what you want with the data		
+	# $output.text = str(data)
+	$TabContainer/Source/output.text = str(data)
+	
+	pass # Replace with function body.
+
+
+	
+
+
+func _on_dialog_save_file_selected(path):
+	# Open a file
+	var file = File.new()
+	if file.open(path, File.WRITE) != 0:
+		print("Error opening file")
+		return
+	
+	
+	# Save the dictionary as JSON (or whatever you want, JSON is convenient here because it's built-in)
+	file.store_line(to_json(data))
+	file.close()
+	$dialog_gamesaved.popup_centered()
+	pass # Replace with function body.
 	pass # Replace with function body.
