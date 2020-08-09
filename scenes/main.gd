@@ -77,7 +77,8 @@ func _on_main_update_data(label, value):
 
 func _on_btn_item_add_pressed():
 	print("btn_item_add_pressed")
-	$TabContainer/World/ItemList.add_item(str("placeholder", rand_range(0,300)))
+	$CenterContainer/ConfirmationDialog.popup()
+	#$TabContainer/World/ItemList.add_item(str("placeholder", rand_range(0,300)))
 	pass # Replace with function body.
 
 
@@ -126,4 +127,10 @@ func _on_dialog_save_file_selected(path):
 	file.close()
 	$dialog_gamesaved.popup_centered()
 	pass # Replace with function body.
+	pass # Replace with function body.
+
+
+func _on_ConfirmationDialog_confirmed():
+	print("Text confirmation dialog accepted")
+	print(str("text: ",$CenterContainer/ConfirmationDialog/VBoxContainer/TextEdit.text))
 	pass # Replace with function body.
