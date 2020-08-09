@@ -232,16 +232,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="CenterContainer/ConfirmationDialog/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/ConfirmationDialog/VBoxContainer"]
 margin_right = 584.0
-margin_bottom = 14.0
+margin_bottom = 24.0
+
+[node name="label_node_name" type="Label" parent="CenterContainer/ConfirmationDialog/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 76.0
+margin_bottom = 19.0
+text = "Node Name"
+
+[node name="edit_node_name" type="LineEdit" parent="CenterContainer/ConfirmationDialog/VBoxContainer/HBoxContainer"]
+margin_left = 80.0
+margin_right = 584.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="CenterContainer/ConfirmationDialog/VBoxContainer"]
+margin_top = 28.0
+margin_right = 584.0
+margin_bottom = 42.0
 text = "Enter text here"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextEdit" type="TextEdit" parent="CenterContainer/ConfirmationDialog/VBoxContainer"]
-margin_top = 18.0
+margin_top = 46.0
 margin_right = 584.0
 margin_bottom = 256.0
 size_flags_vertical = 3
@@ -256,6 +273,7 @@ __meta__ = {
 [connection signal="pressed" from="container_top/btn_quit" to="." method="_on_btn_quit_pressed"]
 [connection signal="text_changed" from="label_title/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_add" to="." method="_on_btn_item_add_pressed"]
+[connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_remove" to="." method="_on_btn_item_remove_pressed"]
 [connection signal="text_changed" from="TabContainer/Source/output" to="." method="_on_output_text_changed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="file_selected" from="dialog_save" to="." method="_on_dialog_save_file_selected"]
