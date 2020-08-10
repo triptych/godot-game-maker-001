@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/edit_text_node.tscn" type="PackedScene" id=2]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
@@ -207,6 +208,7 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
 margin_right = 819.0
 margin_bottom = 316.0
 mouse_filter = 2
@@ -220,7 +222,7 @@ margin_top = 8.0
 margin_right = 709.0
 margin_bottom = 308.0
 rect_min_size = Vector2( 600, 300 )
-window_title = "Add Text Node"
+window_title = "Add/Edit Text Node"
 resizable = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ConfirmationDialog"]
@@ -266,6 +268,16 @@ wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="edit_text_node" parent="CenterContainer" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 409.0
+margin_top = 158.0
+margin_right = 409.0
+margin_bottom = 158.0
+[connection signal="edit_text_node_done" from="." to="." method="_on_main_edit_text_node_done"]
 [connection signal="update_data" from="." to="." method="_on_main_update_data"]
 [connection signal="pressed" from="container_top/btn_new" to="." method="_on_btn_new_pressed"]
 [connection signal="pressed" from="container_top/btn_save" to="." method="_on_btn_save_pressed"]
@@ -273,8 +285,10 @@ __meta__ = {
 [connection signal="pressed" from="container_top/btn_quit" to="." method="_on_btn_quit_pressed"]
 [connection signal="text_changed" from="label_title/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_add" to="." method="_on_btn_item_add_pressed"]
+[connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_add2" to="." method="_on_btn_item_add2_pressed"]
 [connection signal="pressed" from="TabContainer/World/VBoxContainer/btn_item_remove" to="." method="_on_btn_item_remove_pressed"]
 [connection signal="text_changed" from="TabContainer/Source/output" to="." method="_on_output_text_changed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="file_selected" from="dialog_save" to="." method="_on_dialog_save_file_selected"]
 [connection signal="confirmed" from="CenterContainer/ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="editDialogDone" from="CenterContainer/edit_text_node" to="." method="_on_edit_text_node_editDialogDone"]

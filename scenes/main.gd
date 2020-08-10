@@ -28,6 +28,7 @@ var reset_data = data.duplicate(true)
 var file_name = "untitled"
 
 signal update_data(label, value)
+signal edit_text_node_done()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,6 +45,7 @@ func _on_btn_new_pressed():
 	data = reset_data.duplicate(true)
 	$TabContainer/Source/output.text = str(data)
 	$label_title/LineEdit.text = ""
+	$TabContainer/World/ItemList.clear()
 	pass # Replace with function body.
 
 
@@ -113,12 +115,15 @@ func _on_FileDialog_file_selected(path):
 		return
 		
 	# Get the data
-	var data = {}
+	# var data = {}
 	data = parse_json(file.get_line())
-
+	print(data)
 	# Then do what you want with the data		
 	# $output.text = str(data)
 	$TabContainer/Source/output.text = str(data)
+	print("output:", $TabContainer/Source/output.text)
+	# $TabContainer/Source/output.text = str(data)
+	render_data_to_list()
 	
 	pass # Replace with function body.
 
@@ -168,10 +173,11 @@ func render_data_to_list():
 	print("render data to list")
 	#$TabContainer/World/ItemList.add_item(str("placeholder", rand_range(0,300)))
 	$TabContainer/World/ItemList.clear()
+	print("render data to list - data:", data)
 	for i in data.game_world.items :
 		print(i['label'])
 		$TabContainer/World/ItemList.add_item(i.label)	
-	$TabContainer/Source/output.text = str(data)
+	#$TabContainer/Source/output.text = str(data)
 
 func delItem(itemName): 
 	print(str("delItem called with itemName:", itemName))
@@ -196,4 +202,60 @@ func _on_btn_item_remove_pressed():
 	print(selItemArr)
 	print(selItemName)
 	delItem(selItemName)
+	pass # Replace with function body.
+
+
+func _on_btn_item_add2_pressed():
+	print("on_btn_item_add2_pressed")
+	var itemList = $TabContainer/World/ItemList
+	var selItemArr = itemList.get_selected_items()
+	var selItemName = itemList.get_item_text(selItemArr[0])
+	
+	var editPopup = $CenterContainer/edit_text_node/ConfirmationDialog
+	#var itemName = data.game_world.items[data.game_world.items.find_last()]
+	var itmIdx =0
+	for k in data.game_world.items:
+		print(k)
+		if k.label == selItemName:
+			print("found it")
+			$CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/HBoxContainer/edit_node_name.text = k.label
+			$CenterContainer/edit_text_node/ConfirmationDialog/old_node_name.text = k.label
+			$CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/edit_text_content.text = k.content
+		else:
+			itmIdx +=1
+	
+	editPopup.popup()
+	
+	
+	pass # Replace with function body.
+
+
+func _on_main_edit_text_node_done():
+	print("edit_text_node_done")
+	pass # Replace with function body.
+
+
+func _on_edit_text_node_editDialogDone():
+	print("edit dialog done from other scene")
+	#var itemList = $TabContainer/World/ItemList
+	#var selItemArr = itemList.get_selected_items()
+	# var selItemName = itemList.get_item_text(selItemArr[0])
+	#itemList.set_item_text($CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/HBoxContainer/edit_node_name.text)
+	
+	var editedName = $CenterContainer/edit_text_node/ConfirmationDialog/old_node_name.text
+	var itmIdx =0
+	for k in data.game_world.items:
+		print(k)
+		if k.label == editedName:
+			print("found it")
+			#$CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/HBoxContainer/edit_node_name.text = k.label
+			#$CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/edit_text_content.text = k.content
+			k.label = $CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/HBoxContainer/edit_node_name.text
+			k.content = $CenterContainer/edit_text_node/ConfirmationDialog/VBoxContainer/edit_text_content.text
+		else:
+			itmIdx +=1
+	
+	
+	$TabContainer/Source/output.text = str(data)
+	render_data_to_list()
 	pass # Replace with function body.

@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/edit_text_node.gd" type="Script" id=1]
+
+[node name="edit_text_node" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+visible = true
+margin_left = 8.0
+margin_right = 713.0
+margin_bottom = 250.0
+window_title = "Edit Text Node"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmationDialog"]
+margin_left = 8.0
+margin_right = 697.0
+margin_bottom = 208.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmationDialog/VBoxContainer"]
+margin_right = 689.0
+margin_bottom = 24.0
+
+[node name="label_node_name" type="Label" parent="ConfirmationDialog/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 19.0
+text = "Node Name:"
+
+[node name="edit_node_name" type="LineEdit" parent="ConfirmationDialog/VBoxContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 689.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="label_text_content" type="Label" parent="ConfirmationDialog/VBoxContainer"]
+margin_top = 28.0
+margin_right = 689.0
+margin_bottom = 42.0
+text = "Text Content:"
+
+[node name="edit_text_content" type="TextEdit" parent="ConfirmationDialog/VBoxContainer"]
+margin_top = 46.0
+margin_right = 689.0
+margin_bottom = 208.0
+size_flags_vertical = 3
+
+[node name="old_node_name" type="LineEdit" parent="ConfirmationDialog"]
+visible = false
+margin_left = 8.0
+margin_top = 280.316
+margin_right = 66.0
+margin_bottom = 304.316
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
